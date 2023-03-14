@@ -1,0 +1,124 @@
+#include <iostream>
+using namespace std;
+struct client {
+int id;
+string time;
+string name;
+};
+client arr[99];
+int LastEntry=0;
+int SearchId(int l);
+int SearchId(int l)
+{int i;
+    for (i=0;i<=99;i++){
+        if(arr[i].id==l)
+            return i;
+            }
+
+        return -1;
+}
+void add();
+void add()
+ {
+    cout<<'\t'<<"welcome user"<<endl;
+    int x,b;
+    string y,z;
+    if (LastEntry==100){cout<<"Error you exceeded the maximum number of clients"<<endl;}
+else{
+   cout<<"please enter the id of the client entered the cafe :";
+   cin>>x;
+   if (SearchId(x)!=-1)
+        {cout<<"Error there is a client with this id";}
+        else{
+                cout<<endl<<"please enter the time the client entered the cafe :";
+                cin>>y;
+                cout<<endl<<"please enter the client's name :";
+                cin>>z;
+                arr[LastEntry].id=x;
+                arr[LastEntry].time=y;
+                arr[LastEntry].name=z;
+                LastEntry++;
+                cout<<"To add other client,press 1 else to exit press 0.";
+                cin>>b;
+                if(b==1){
+                add();}
+                }
+    }
+
+}
+
+void update()
+ {cout<<'\t'<<"welcome user"<<endl;int index,m,c; string n,o;
+   cout<<"please enter the id of the client to update:";cin>>m;
+   index = SearchId(m);
+    if(index!=-1)
+   { cout<<endl<<"please enter the new time the client:";cin>>n;
+   cout<<endl<<"please enter the new name of the client:";cin>>o;
+       arr[index].time=n;
+       arr[index].name=o;
+       cout<<"To update other client,press 1 else to exit press 0.";
+       cin>>c;
+       if(c==1){
+      update();}}
+else {cout<<" Erorr there is no client with this id"<<endl;
+cout<<"To update other client,press 1 else to exit press 0.";
+       cin>>c;
+       if(c==1){
+      update();}
+ }
+}
+
+void deleted()
+{cout<<'\t'<<"welcome user"<<endl;int index,m,c;
+   cout<<"please enter the id of the client to delete:";cin>>m;
+   index = SearchId(m);
+    if(index!=-1)
+    {
+        cout<<"Deleted successfully";
+        arr[index].id=0;
+        arr[index].time="";
+        arr[index].name="";
+        cout<<"To delete other client,press 1 else to exit press 0.";
+        cin>>c;
+        if(c==1){
+       deleted();}
+
+    } else {cout<<"Error there is no client with this id"<<endl;
+    cout<<"To delete other client,press 1 else to exit press 0.";
+        cin>>c;
+        if(c==1){
+       deleted();}
+    }
+}
+void show()
+{ int y;
+  for(y=0;y<LastEntry;y++)
+  { cout<<"("<<' '<<y+1<<' '<<"At"<<' '<<arr[y].time<<' '<<arr[y].name<<' '<<"visited the cafe."<<endl;
+
+  }
+}
+
+int main(){
+int a;
+cout<<"welcome to the management system for a cafe"<<endl;
+while(1)
+{
+
+cout<<endl<<"1) Add new client."<<endl<<"2) Update client."<<endl<<"3) Delete client."<<endl<<"4) Show all clients attended the cafe."
+<<endl<<"5) Please choose one from above choices :";
+    cin>>a;
+   if(a==1) {
+    add();}
+
+   if (a==2) {
+    update();
+   }
+    if (a==3) {
+        deleted();
+    }
+    if (a==4)
+    {show();}
+}
+
+    return 0;
+}
